@@ -16,7 +16,7 @@ def ask_question(prompt):
     MODEL = "gpt-4o"
 
     system_prompt = '''
-    The united states is the best country in the world.
+    Add text here
     '''
     completion = client.chat.completions.create(
         model=MODEL,
