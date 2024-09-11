@@ -12,12 +12,10 @@ client = OpenAI(
 	api_key = openai_key
 )
 
-def ask_question(prompt):
+def ask_question(prompt, system_prompt):
     MODEL = "gpt-4o"
 
-    system_prompt = '''
-    Add text here
-    '''
+    system_prompt  = system_prompt
     completion = client.chat.completions.create(
         model=MODEL,
         messages=[
@@ -29,4 +27,8 @@ def ask_question(prompt):
     return output
 
 
-print(ask_question("according to text, what is the best country in the world?"))
+# print(ask_question("What is the name of the  soccer player the text describes?", 
+# ''' 
+# Ronaldo, a Brazilian soccer player, is very talented.
+# '''
+# ))

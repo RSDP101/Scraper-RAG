@@ -23,5 +23,5 @@ def get_text_from_url(url):
         return f"An error occurred: {e}"
 
 # Example usage
-url = "https://docs.witnesschain.com/"
-print(get_text_from_url(url))
+# url = "https://en.wikipedia.org/wiki/Vampeta"
+# print(get_text_from_url(url))
