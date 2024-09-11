@@ -16,6 +16,6 @@ def ask_from_website(url, question):
     return answer
 
 # Example usage
-url = "https://en.wikipedia.org/wiki/Vampeta"
-question = "How old is he?"
+url = "https://asvas-organization.gitbook.io/koboto-network-interface"
+question = "What is Koboto, in simple terms?"
 print(ask_from_website(url, question))
