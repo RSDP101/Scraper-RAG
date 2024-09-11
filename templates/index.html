@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Question Answering Bot</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        #chat-container { max-width: 600px; margin: 0 auto; }
+        #messages { height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; }
+        .message { margin: 5px 0; }
+        .user { color: blue; }
+        .bot { color: green; }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <h2>Ask a Question from a Website</h2>
+        <input type="text" id="url-input" placeholder="Enter URL..." style="width: 100%; margin-bottom: 10px;">
+        <input type="text" id="question-input" placeholder="Enter your question..." style="width: 100%;">
+        <button onclick="sendQuestion()">Ask</button>
+
+        <div id="messages"></div>
+    </div>
+
+    <script>
+        function sendQuestion() {
+            const urlInput = document.getElementById('url-input');
+            const questionInput = document.getElementById('question-input');
+            const messages = document.getElementById('messages');
+            const url = urlInput.value;
+            const question = questionInput.value;
+
+            if (!url || !question) {
+                alert("Please enter both a URL and a question.");
+                return;
+            }
+
+            // Display the user's question
+            const userDiv = document.createElement('div');
+            userDiv.className = 'message user';
+            userDiv.textContent = `You asked: "${question}" about ${url}`;
+            messages.appendChild(userDiv);
+
+            // Send the URL and question to the server
+            fetch('/ask', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ url: url, question: question }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                const botMessage = data.answer || "Sorry, an error occurred.";
+                const botDiv = document.createElement('div');
+                botDiv.className = 'message bot';
+                botDiv.textContent = 'Bot: ' + botMessage;
+                messages.appendChild(botDiv);
+                messages.scrollTop = messages.scrollHeight; // Scroll to the bottom
+            })
+            .catch(error => console.error('Error:', error));
+
+            // Clear the input fields
+            urlInput.value = '';
+            questionInput.value = '';
+        }
+    </script>
+</body>
+</html>
