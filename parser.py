@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-
+from get_subpages import get_subpages_from_url
 def get_text_from_url(url):
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
@@ -22,6 +22,17 @@ def get_text_from_url(url):
     except requests.exceptions.RequestException as e:
         return f"An error occurred: {e}"
 
+def get_all_texts(base_url):
+    subpages = get_subpages_from_url(base_url)
+    all_texts_from_pages = []
+    for page in subpages:
+        # print ("scraping page")
+        text = get_text_from_url(page)
+        all_texts_from_pages.append(text)
+    return all_texts_from_pages
+
+
 # Example usage
-# url = "https://en.wikipedia.org/wiki/Vampeta"
-# print(get_text_from_url(url))
+# base_url = "https://asvas-organization.gitbook.io/koboto-network-interface"
+# all_texts = get_all_texts(base_url)
+
