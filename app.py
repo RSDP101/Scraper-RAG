@@ -5,17 +5,15 @@ from jaccard import optimal_text
 app = Flask(__name__)
 
 def ask_from_website(url, question):
-    text = get_text_from_url(url)
-    # print (f"current text: {text}")
-    text2 = optimal_text(url, question)
-    print (f"desired text : {text2}")
+    text = optimal_text(url, question)
+    print (f"desired text : {text}")
 
     if text.startswith("An error occurred:"):
         return text
     
-    prompt = f"Consider the following question : {question}. Answer based on your knowledge and the following reference text:{text2}"
+    prompt = f"Consider the following question : {question}. Answer based on your knowledge and the following reference text:{text}"
     # print (f"current prompt: {prompt}")
-    answer = ask_question(prompt, text2)
+    answer = ask_question(prompt, text)
     
     return answer
 

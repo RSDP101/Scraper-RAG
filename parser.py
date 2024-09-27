@@ -16,7 +16,7 @@ def get_text_from_url(url):
         
         # Extract the main text by selecting all <p> tags
         paragraphs = soup.find_all('p')
-        text = ' '.join([p.get_text() for p in paragraphs[:50]])  # Limiting to the first 50 paragraphs
+        text = ' '.join([p.get_text() for p in paragraphs[:100]])  # Limiting to the first 50 paragraphs
         
         return text
     except requests.exceptions.RequestException as e:
@@ -26,13 +26,11 @@ def get_all_texts(base_url):
     subpages = get_subpages_from_url(base_url)
     all_texts_from_pages = []
     for page in subpages:
-        # print ("scraping page")
         text = get_text_from_url(page)
         all_texts_from_pages.append(text)
     return all_texts_from_pages
 
-
 # Example usage
-# base_url = "https://asvas-organization.gitbook.io/koboto-network-interface"
-# all_texts = get_all_texts(base_url)
-
+if __name__ == "__main__":
+    base_url = "https://asvas-organization.gitbook.io/koboto-network-interface"
+    all_texts = get_all_texts(base_url)

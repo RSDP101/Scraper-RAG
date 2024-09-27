@@ -6,7 +6,6 @@ def get_subpages_from_url(base_url):
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
     }
-    
     try:
         # Send a GET request to the base URL
         response = requests.get(base_url, headers=headers, timeout=10)
@@ -33,12 +32,12 @@ def get_subpages_from_url(base_url):
     except requests.exceptions.RequestException as e:
         return f"An error occurred: {e}"
 
-# Example usage
-# base_url = "https://asvas-organization.gitbook.io/koboto-network-interface"
-# subpages = get_subpages_from_url(base_url)
+# if __name__ == "__main__":
+#     base_url = "https://asvas-organization.gitbook.io/koboto-network-interface"
+#     subpages = get_subpages_from_url(base_url)
 
-# print (len(subpages))
-# print (subpages[1])
-# Print the found subpages
-# for subpage in subpages:
-#     print(f"subpage 1: {subpage}")
+#     print (len(subpages))
+#     print (subpages[1])
+#     Print the found subpages
+#     for subpage in subpages:
+#         print(f"subpage 1: {subpage}")
